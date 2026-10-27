@@ -7,14 +7,15 @@
 // Servo object
 Servo myservo;
 
+const char WIFI_SSID[] = "ICTlab1";
+const char WIFI_PASSWORD[] = "ICT-lab-education";
+  // const char WIFI_SSID[] = SECRET_SSID;
+  // const char WIFI_PASSWORD[] = SECRET_PASS;
 
-const char WIFI_SSID[] = SECRET_SSID;
-const char WIFI_PASSWORD[] = SECRET_PASS;
-
-const char SERVER[] = "10.154.133.253";
+const char SERVER[] =  "192.168.40.67";    //"10.154.133.253";
 const int SERVER_PORT = 5000;
 
-IPAddress targetIP(10,154,133,253);
+IPAddress targetIP(192,168,40,67);
 
 WiFiClient wifiClient;
 HttpClient httpClient(wifiClient, SERVER, SERVER_PORT);
@@ -40,7 +41,8 @@ void setup() {
 State shouldState;
 State isState;
 void loop() {
-  bool wifiOK = (WiFi.status() == WL_CONNECTED);
+  Serial.println(WiFi.ping(targetIP));
+  bool wifiOK = (WiFi.ping(targetIP) > 0);
   
   if (wifiOK) {
 
